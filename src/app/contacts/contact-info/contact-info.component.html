@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="offset-md-3">
+    </div>
+    <div class="col-md-6 col-sm-10">
+      <div class="jumbotron">
+        <h1 class="display-5 text-center">Please enter contact informations!</h1>
+        <hr class="my-4">
+        <form #contactForm="ngForm">
+          <div class="form-group">
+            <label for="firstNameInput">* First name</label>
+            <input type="text" [(ngModel)]="model.FirstName" #firstNameInput=ngModel class="form-control" id="firstNameInput" name="firstNameInput"
+              placeholder="Enter first name" required>
+            <div *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)" class="alert alert-danger mt-1">
+              *First name is mandatory!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastNameInput">Last name</label>
+            <input type="text" [(ngModel)]="model.LastName" class="form-control" id="lastNameInput" name="lastNameInput" placeholder="Enter last name">
+          </div>
+          <div class="form-group">
+            <label for="phoneInput">Phone number</label>
+            <input type="text" [(ngModel)]="model.PhoneNumber" class="form-control" id="phoneInput" name="phoneInput" placeholder="Enter your phone number">
+          </div>
+          <button type="submit" *ngIf="!isEditMode" [disabled]="!contactForm.valid" (click)="addContact()" class="btn btn-primary">Add contact</button>
+          <button type="submit" *ngIf="isEditMode" [disabled]="!contactForm.valid" (click)="editContact()" class="btn btn-primary">Edit contact</button>
+        </form>
+      </div>
+    </div>
+    <div class="offset-md-3">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-3">
+    </div>
+    <div class="col-md-6" *ngIf="!isEditMode">
+      <div class="alert alert-success w-100 text-center" *ngIf="isCreated">Contact is successfuly created!</div>
+      <div class="alert alert-danger w-100 text-center" *ngIf="isCreated == false">Some error occured. Please, try later!</div>
+    </div>
+    <div class="col-md-6" *ngIf="isEditMode">
+      <div class="alert alert-success w-100 text-center" *ngIf="isEdited">Contact is successfuly edited!</div>
+      <div class="alert alert-danger w-100 text-center" *ngIf="isEdited == false">Some error occured. Please, try later!</div>
+    </div>
+    <div class="offset-md-3">
+    </div>
+  </div>
+</div>

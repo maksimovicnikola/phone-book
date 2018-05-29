@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">Phone number</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of contacts; let i = index">
+          <th scope="row">{{ i+1 }}</th>
+          <td>{{ item.FirstName }}</td>
+          <td>{{ item.LastName }}</td>
+          <td>{{ item.PhoneNumber }}</td>
+          <td>
+            <button class="btn btn-warning" [routerLink]="['/edit-contact', item.RowId]">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteContact(item.RowId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="w-100">
+      <button class="btn btn-primary float-left d-inline" routerLink='/add-contact'>Add new contact</button>
+      <button class="btn btn-danger float-right d-inline" (click)="removeAllContacts()">Remove all contacts</button>
+    </div>
+  </div>
+</div>
