@@ -30,7 +30,11 @@ export class ContactListComponent implements OnInit, OnDestroy {
       .subscribe((res: Contact[]) => {
         this.contacts = res;
         this.showLoadingSpinner = false;
-      })
+      },
+    err => {
+      console.log(err);
+      this.showLoadingSpinner = false;
+    })
 
     this.sub.add(contactList$)
   }
@@ -70,6 +74,8 @@ export class ContactListComponent implements OnInit, OnDestroy {
         err => {
           this.showLoadingSpinner = false;
         })
+
+      this.sub.add(removeAllContacts$);
   }
 
   ngOnDestroy(): void {

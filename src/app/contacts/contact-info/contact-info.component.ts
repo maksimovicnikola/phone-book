@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { ContactsService } from '../../services/contacts/contacts.service';
 import { Contact } from './../../models/contact';
 import { Component, OnInit, Input } from '@angular/core';
@@ -20,8 +21,9 @@ export class ContactInfoComponent implements OnInit {
   public isEditMode: boolean = false;
   public isCreated: boolean;
   public isEdited: boolean;
-
   public showLoadingSpinner: boolean = false;
+
+  private sub = new Subscription();
 
   ngOnInit() {
     // if contact info is defined, it means this page is in edit template
@@ -39,7 +41,7 @@ export class ContactInfoComponent implements OnInit {
     this.showLoadingSpinner = true;
     this.preventOfWhiteSpaces();
 
-    this.contactService.addContact(this.model).subscribe(res => {
+    let addContact$ = this.contactService.addContact(this.model).subscribe(res => {
       if (res === 1) {
         this.isCreated = true;
       }
@@ -54,13 +56,15 @@ export class ContactInfoComponent implements OnInit {
         this.showLoadingSpinner = false;
         console.log(err);
       });
+
+    this.sub.add(addContact$);
   }
 
   editContact() {
     this.showLoadingSpinner = true;
     this.preventOfWhiteSpaces();
 
-    this.contactService.updateContact(this.model)
+    let updateContact$ = this.contactService.updateContact(this.model)
       .subscribe((res: number) => {
         if (res === 1) {
           this.isEdited = true;
@@ -76,6 +80,8 @@ export class ContactInfoComponent implements OnInit {
           this.showLoadingSpinner = false;
           console.log(err);
         });
+
+    this.sub.add(updateContact$);
   }
 
   // preventing of whitespaces  

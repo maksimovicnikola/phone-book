@@ -17,16 +17,20 @@
           <td>{{ item.FirstName }}</td>
           <td>{{ item.LastName }}</td>
           <td>{{ item.PhoneNumber }}</td>
-          <td>
-            <button class="btn btn-warning" [routerLink]="['/edit-contact', item.RowId]">Edit</button>
+          <td class="text-right">
+            <button class="btn btn-info" [routerLink]="['/edit-contact', item.RowId]">
+              <i class="fa fa-edit"></i>
+            </button>
           </td>
-          <td>
-            <button class="btn btn-danger" (click)="open(content, 'deleteContact', item.RowId)">Delete</button>
+          <td class="text-right">
+            <button class="btn btn-danger" (click)="open(content, 'deleteContact', item.RowId)">
+              <i class="fa fa-trash"></i>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="w-100">
+    <div class="w-100 mb-5">
       <button class="btn btn-primary float-left d-inline" routerLink='/add-contact'>Add new contact</button>
       <button class="btn btn-danger float-right d-inline" (click)="open(content, 'removeAll')">Remove all contacts</button>
     </div>
@@ -38,7 +42,7 @@
     <p>Are you sure you want to continue?</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="c(true)">Confirm</button>    
+    <button type="button" class="btn btn-primary" (click)="c(true)">Confirm</button>
     <button type="button" class="btn btn-light" (click)="c(false)">Cancel</button>
   </div>
 </ng-template>
