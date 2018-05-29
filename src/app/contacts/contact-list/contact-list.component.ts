@@ -47,7 +47,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     let removeAllContacts$ = this.contactsService.deleteAllContact()
       .subscribe((res: number) => {
         if(res === 1) {
-          console.log('Contacts are successfully deleted!')
+          this.contacts = [];
         }
         else {
           console.log('Some error occured!');

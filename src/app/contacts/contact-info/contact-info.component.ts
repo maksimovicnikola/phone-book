@@ -23,7 +23,7 @@ export class ContactInfoComponent implements OnInit {
 
   ngOnInit() {
     // if contact info is defined, it means this page is in edit template
-    if (this.contactInfo) {
+    if (this.contactInfo != ( null && undefined) ) {
       this.model = this.contactInfo;
 
       this.isEditMode = true;
