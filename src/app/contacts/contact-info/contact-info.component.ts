@@ -1,4 +1,4 @@
-import { ContactsService } from './../../services/contacts.service';
+import { ContactsService } from '../../services/contacts/contacts.service';
 import { Contact } from './../../models/contact';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -18,12 +18,14 @@ export class ContactInfoComponent implements OnInit {
 
   public model: Contact = new Contact();
   public isEditMode: boolean = false;
-  public isCreated: boolean ;
+  public isCreated: boolean;
   public isEdited: boolean;
+
+  public showLoadingSpinner: boolean = false;
 
   ngOnInit() {
     // if contact info is defined, it means this page is in edit template
-    if (this.contactInfo != ( null && undefined) ) {
+    if (this.contactInfo != (null && undefined)) {
       this.model = this.contactInfo;
 
       this.isEditMode = true;
@@ -34,6 +36,7 @@ export class ContactInfoComponent implements OnInit {
   }
 
   addContact() {
+    this.showLoadingSpinner = true;
     this.preventOfWhiteSpaces();
 
     this.contactService.addContact(this.model).subscribe(res => {
@@ -43,35 +46,42 @@ export class ContactInfoComponent implements OnInit {
       else {
         this.isCreated = false;
       }
+
+      this.showLoadingSpinner = false;
     },
       err => {
         this.isCreated = false;
+        this.showLoadingSpinner = false;
         console.log(err);
       });
   }
 
   editContact() {
+    this.showLoadingSpinner = true;
     this.preventOfWhiteSpaces();
 
     this.contactService.updateContact(this.model)
       .subscribe((res: number) => {
-        if (res === 1) {  
+        if (res === 1) {
           this.isEdited = true;
         }
         else {
           this.isEdited = false;
         }
+
+        this.showLoadingSpinner = false;
       },
         err => {
           this.isEdited = false;
+          this.showLoadingSpinner = false;
           console.log(err);
         });
   }
 
+  // preventing of whitespaces  
   preventOfWhiteSpaces() {
-    // preventing of whitespaces
-    this.model.FirstName = this.model.FirstName.trim();
-    this.model.LastName = this.model.LastName.trim();
-    this.model.PhoneNumber = this.model.PhoneNumber.trim();
+    this.model.FirstName != undefined ? this.model.FirstName.trim() : this.model.FirstName;
+    this.model.LastName != undefined ? this.model.LastName.trim() : this.model.LastName;
+    this.model.PhoneNumber != undefined ? this.model.PhoneNumber.trim() : this.model.PhoneNumber;
   }
 }

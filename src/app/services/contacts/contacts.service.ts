@@ -1,6 +1,6 @@
-import { Contact } from './../models/contact';
+import { Contact } from '../../models/contact';
 import { Injectable } from '@angular/core';
-import { MappingApi } from '../mappings/mapping-api';
+import { MappingApi } from '../../mappings/mapping-api';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()

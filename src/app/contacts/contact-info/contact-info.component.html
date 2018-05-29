@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="!isCreated && !isEdited">
   <div class="row">
     <div class="offset-md-3">
     </div>
@@ -32,7 +32,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container pt-5">
   <div class="row">
     <div class="offset-md-3">
     </div>
@@ -48,3 +48,4 @@
     </div>
   </div>
 </div>
+<div *ngIf="showLoadingSpinner" class="loader"></div>

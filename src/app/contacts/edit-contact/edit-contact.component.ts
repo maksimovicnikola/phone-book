@@ -1,4 +1,4 @@
-import { ContactsService } from './../../services/contacts.service';
+import { ContactsService } from '../../services/contacts/contacts.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../../models/contact';
